@@ -1,8 +1,19 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
-module.exports = {
-  entry: "./src/index.ts",
-  devtool: 'inline-source-map',
+const config = {
+  devtool: "inline-source-map",
+  watch: true,
+  watchOptions: {
+    ignored: "**/node_modules",
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
+};
+
+const loaders = {
   module: {
     rules: [
       {
@@ -10,13 +21,56 @@ module.exports = {
         use: "ts-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.hbs$/,
+        loader: "handlebars-loader",
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+        ],
+      },
     ],
   },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+};
+
+const plugins = {
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "chrome extension",
+      filename: "[name]/[name].html",
+      template: "src/templates/spa.hbs",
+      minify: true,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "src/extension/manifest.json",
+        },
+      ],
+    }),
+  ],
+};
+
+const entryAndOutput = {
+  entry: {
+    popup: "./src/popup/index.ts",
   },
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: "[name]/[name].js",
+    path: path.resolve(__dirname, "better-github-comments"),
+    clean: true,
   },
+};
+
+module.exports = (env, argv) => {
+  return {
+    ...config,
+    ...loaders,
+    ...plugins,
+    ...entryAndOutput,
+  };
 };
