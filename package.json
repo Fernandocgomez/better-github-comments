@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chrome": "^0.0.243",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "handlebars-loader": "^1.7.3",
@@ -23,5 +26,10 @@
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "openai": "^3.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
