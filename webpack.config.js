@@ -48,7 +48,7 @@ const plugins = {
     new CopyPlugin({
       patterns: [
         {
-          from: "src/extension/manifest.json",
+          from: "src/extension-config/manifest.json",
         },
       ],
     }),
@@ -57,7 +57,7 @@ const plugins = {
 
 const entryAndOutput = {
   entry: {
-    popup: "./src/popup/index.ts",
+    popup: "./src/popup/index.tsx",
   },
   output: {
     filename: "[name]/[name].js",
