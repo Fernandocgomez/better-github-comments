@@ -61,7 +61,7 @@ const entryAndOutput = {
   },
   output: {
     filename: "[name]/[name].js",
-    path: path.resolve(__dirname, "extension"),
+    path: path.resolve(__dirname, "dist"),
     clean: true,
   },
 };
