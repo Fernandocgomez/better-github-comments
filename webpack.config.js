@@ -61,7 +61,7 @@ const entryAndOutput = {
   },
   output: {
     filename: "[name]/[name].js",
-    path: path.resolve(__dirname, "better-github-comments"),
+    path: path.resolve(__dirname, "extension"),
     clean: true,
   },
 };
